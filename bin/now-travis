@@ -50,7 +50,9 @@ function deploy(context, sha) {
     '--token', nowToken,
     '--no-clipboard'
   ];
-  const alias = context === 'production' && process.env.NOW_ALIAS;
+
+  // always use if a stage alias is given
+  const alias = (context === 'production' && process.env.NOW_ALIAS) || process.env.NOW_STAGE_ALIAS;
   let stdout = '';
 
   if (alias) {
